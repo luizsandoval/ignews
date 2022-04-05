@@ -17,7 +17,7 @@ type User = {
 const subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== 'POST') {
         res.setHeader('Allow', 'POST');
-        res.status(405).end('Method not allowed');
+        return res.status(405).end('Method not allowed');
     }
 
     const session = await getSession({ req });
