@@ -1,6 +1,12 @@
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 
+import Prismic from '@prismicio/client';
+
+import { getPrismicClient } from '../../services/prismic';
+
 import styles from './styles.module.scss';
+
 const Posts = () => {
     return (
         <>
@@ -9,7 +15,7 @@ const Posts = () => {
             </Head>
             <main className={styles.container}>
                 <div className={styles.posts}>
-                    <a href="">
+                    <a href=''>
                         <time>06 de Abril de 2022</time>
                         <strong>Lorem ipsum dolor sit amet</strong>
                         <p>
@@ -46,6 +52,22 @@ const Posts = () => {
             </main>
         </>
     );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+    const prismic = getPrismicClient();
+
+    const response = await prismic.query(
+        Prismic.predicates.at('document.type', 'post'),
+        {
+            fetch: ['post.title', 'post.content'],
+            pageSize: 100,
+        }
+    );
+
+    return {
+        props: {},
+    };
 };
 
 export default Posts;
