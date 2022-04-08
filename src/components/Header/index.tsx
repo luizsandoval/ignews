@@ -1,6 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { SignInButton } from '../SignInButton';
+
+import { ActiveLink } from './ActiveLink';
 
 import styles from './styles.module.scss';
 
@@ -15,12 +17,12 @@ export function Header() {
                     alt='Ig news - the best and newly news about the react world!'
                 />
                 <nav>
-                    <Link href='/'>
-                        <a className={styles.active}>Home</a>
-                    </Link>
-                    <Link href='/posts'>
+                    <ActiveLink activeClassName={styles.active} href='/'>
+                        <a>Home</a>
+                    </ActiveLink>
+                    <ActiveLink activeClassName={styles.active} href='/posts'>
                         <a>Posts</a>
-                    </Link>
+                    </ActiveLink>
                 </nav>
                 <SignInButton />
             </div>
